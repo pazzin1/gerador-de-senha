@@ -65,9 +65,24 @@ function geraSenha(){
     for(let i = 0; i < tamanhoSenha;i++);{
     let numeroAleatorio = Math.random()*alfabeto.length;
     numeroAleatorio = Math.floor(numeroAleatorio);
-    senha = senha + letrasMaiusculas(numeroAleatorio);
-
+    senha = senha + alfabeto[numeroAleatorio];
+}
 campoSenha.value = senha;
-classificaSenha();
+classificaSenha(alfabeto.length);
 }
-}
+
+function classificaSenha(tamanhoSenha){
+    let entropia = tamanhoSenha * matchMedia.log2(tamanhoSenha);
+    console.log(entropia);
+    forcaSenha.classList.remove('fraca','media','forte');
+    if(entropia > 57){
+        forcaSenha.classList.add('forte');
+     } else if (entropia > 35 && entropia < 57){
+        forcaSenha.classList.add('media');
+     } else if (entropia <= 35){
+        forcaSenha.classList.add('fraca');     
+     }
+     const valorEntropia = doument.querySelector('.entropia');
+     valorEntropia.textContent = Math.floor(2**entropia/(100e6*60*60*24));
+     }
+
